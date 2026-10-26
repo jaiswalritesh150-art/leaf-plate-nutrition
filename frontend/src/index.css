@@ -1,0 +1,41 @@
+@import "@fontsource/young-serif/400.css";
+@import "@fontsource-variable/figtree";
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Young Serif", Georgia, serif;
+  --font-sans: "Figtree Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --color-ink: #12352f;        /* deep spruce: text, primary surfaces */
+  --color-ink-soft: #1d4a42;
+  --color-body: #2a4a43;
+  --color-muted: #50685f;      /* 5.3:1 on mist */
+  --color-mist: #eaf1ed;       /* page background */
+  --color-paper: #fbfdfb;      /* raised surfaces */
+  --color-line: #cddbd3;
+  --color-moss: #2f6b53;       /* interactive accent */
+  --color-moss-dark: #245541;
+  --color-mango: #f2b544;      /* the one warm highlight */
+  --color-mango-soft: #fbe9c0;
+
+  --color-booked-bg: #e0ebf9;  --color-booked-fg: #174e8c;
+  --color-done-bg: #dcf0e4;    --color-done-fg: #14633b;
+  --color-noshow-bg: #fbe2dd;  --color-noshow-fg: #a32316;
+  --color-warn-bg: #fdf0d2;    --color-warn-fg: #7a4a00;
+}
+
+/* In @layer base so Tailwind utilities (text-white etc.) can override them. */
+@layer base {
+  html { background: var(--color-mist); color: var(--color-body); }
+  body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; min-height: 100dvh; }
+  h1, h2, h3 { font-family: var(--font-display); color: var(--color-ink); font-weight: 400; letter-spacing: -0.01em; }
+  :focus-visible { outline: 3px solid var(--color-moss); outline-offset: 2px; border-radius: 6px; }
+  button { cursor: pointer; }
+  button:disabled { cursor: not-allowed; }
+}
+
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes pop { from { opacity: 0; transform: scale(.96); } to { opacity: 1; transform: none; } }
+.pop { animation: pop .18s ease-out; }
+.rise { animation: rise .35s ease-out both; }
+@media (prefers-reduced-motion: reduce) { .pop, .rise, .animate-spin { animation: none !important; } * { transition: none !important; } }

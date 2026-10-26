@@ -1,0 +1,19 @@
+# Render Blueprint: New + > Blueprint, pick this repo. Then set the two secret env vars in the dashboard.
+services:
+  - type: web
+    name: kayro-appointments-api
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      - key: DATABASE_URL
+        sync: false          # paste your Supabase pooler connection string
+      - key: ALLOWED_ORIGINS
+        sync: false          # e.g. https://your-app.vercel.app
+      - key: CLINIC_TIMEZONE
+        value: Asia/Kolkata
